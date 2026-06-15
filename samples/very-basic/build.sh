@@ -55,7 +55,7 @@ if [ $SKIP_FILE = 1 ]; then
 fi
 
 # use WAMR SDK to build out the .wasm binary
-/opt/wasi-sdk/bin/clang     \
+$WASI_SDK/bin/clang     \
         --target=wasm32 -O0 -z stack-size=16192 \
         --sysroot=${WAMR_DIR}/wamr-sdk/app/libc-builtin-sysroot  \
         -Wl,--allow-undefined-file=${WAMR_DIR}/wamr-sdk/app/libc-builtin-sysroot/share/defined-symbols.txt \
@@ -73,7 +73,7 @@ fi
 done
 
 # workaround to compile as wasi target
-/opt/wasi-sdk/bin/clang -O0        \
+$WASI_SDK/bin/clang -O0        \
         -o ${OUT_DIR}/wasm-apps/wasi_functions.wasm wasi_functions.c
 
 echo "####################build wasm apps done"
