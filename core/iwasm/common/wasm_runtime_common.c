@@ -1904,11 +1904,9 @@ wasm_runtime_init_wasi(WASMModuleInstanceCommon *module_inst,
     struct argv_environ_values *argv_environ = NULL;
     bool fd_table_inited = false, fd_prestats_inited = false;
     bool argv_environ_inited = false;
-#if WASM_PHANTOM_COMPAT == 0 // just removes warnings (unused variable)
     __wasi_fd_t wasm_fd = 3;
     int32 raw_fd;
     char *path, resolved_path[PATH_MAX];
-#endif
     uint32 i;
 
     if (!(wasi_ctx = runtime_malloc(sizeof(WASIContext), NULL, error_buf,
@@ -2010,8 +2008,6 @@ wasm_runtime_init_wasi(WASMModuleInstanceCommon *module_inst,
     }
     argv_environ_inited = true;
 
-#if WASM_PHANTOM_COMPAT == 0 // XXX : implement the stuff needed for this to work
-    /* Prepopulate curfds with stdin, stdout, and stderr file descriptors. */
     if (!fd_table_insert_existing(curfds, 0, (stdinfd != -1) ? stdinfd : 0)
         || !fd_table_insert_existing(curfds, 1, (stdoutfd != -1) ? stdoutfd : 1)
         || !fd_table_insert_existing(curfds, 2,
@@ -2044,7 +2040,6 @@ wasm_runtime_init_wasi(WASMModuleInstanceCommon *module_inst,
         fd_table_insert_existing(curfds, wasm_fd, raw_fd);
         fd_prestats_insert(prestats, dir_list[i], wasm_fd);
     }
-#endif // WASM_PHANTOM_COMPAT
 
     wasi_ctx->curfds = curfds;
     wasi_ctx->prestats = prestats;

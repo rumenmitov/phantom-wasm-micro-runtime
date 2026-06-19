@@ -54,7 +54,7 @@ typedef struct WASIContext {
     char **argv_list;
     char *env_buf;
     char **env_list;
-} * wasi_ctx_t;
+} *wasi_ctx_t;
 
 wasi_ctx_t
 wasm_runtime_get_wasi_ctx(wasm_module_inst_t module_inst);
@@ -156,6 +156,7 @@ wasi_args_sizes_get(wasm_exec_env_t exec_env, uint32 *argc_app,
     return 0;
 }
 
+[[maybe_unused]]
 static wasi_errno_t
 wasi_clock_res_get(wasm_exec_env_t exec_env,
                    wasi_clockid_t clock_id, /* uint32 clock_id */
@@ -169,6 +170,7 @@ wasi_clock_res_get(wasm_exec_env_t exec_env,
     return wasmtime_ssp_clock_res_get(clock_id, resolution);
 }
 
+[[maybe_unused]]
 static wasi_errno_t
 wasi_clock_time_get(wasm_exec_env_t exec_env,
                     wasi_clockid_t clock_id,    /* uint32 clock_id */
@@ -260,10 +262,11 @@ wasi_environ_sizes_get(wasm_exec_env_t exec_env, uint32 *environ_count_app,
     return 0;
 }
 
+[[maybe_unused]]
 static wasi_errno_t
 wasi_fd_prestat_get(wasm_exec_env_t exec_env, wasi_fd_t fd,
                     wasi_prestat_app_t *prestat_app)
-{
+{  
     wasm_module_inst_t module_inst = get_module_inst(exec_env);
     wasi_ctx_t wasi_ctx = get_wasi_ctx(module_inst);
     struct fd_prestats *prestats = wasi_ctx_get_prestats(module_inst, wasi_ctx);
@@ -285,6 +288,7 @@ wasi_fd_prestat_get(wasm_exec_env_t exec_env, wasi_fd_t fd,
     return 0;
 }
 
+[[maybe_unused]]
 static wasi_errno_t
 wasi_fd_prestat_dir_name(wasm_exec_env_t exec_env, wasi_fd_t fd, char *path,
                          uint32 path_len)
@@ -299,6 +303,7 @@ wasi_fd_prestat_dir_name(wasm_exec_env_t exec_env, wasi_fd_t fd, char *path,
     return wasmtime_ssp_fd_prestat_dir_name(prestats, fd, path, path_len);
 }
 
+[[maybe_unused]]
 static wasi_errno_t
 wasi_fd_close(wasm_exec_env_t exec_env, wasi_fd_t fd)
 {
@@ -313,6 +318,7 @@ wasi_fd_close(wasm_exec_env_t exec_env, wasi_fd_t fd)
     return wasmtime_ssp_fd_close(curfds, prestats, fd);
 }
 
+[[maybe_unused]]
 static wasi_errno_t
 wasi_fd_datasync(wasm_exec_env_t exec_env, wasi_fd_t fd)
 {
@@ -326,6 +332,7 @@ wasi_fd_datasync(wasm_exec_env_t exec_env, wasi_fd_t fd)
     return wasmtime_ssp_fd_datasync(curfds, fd);
 }
 
+[[maybe_unused]]
 static wasi_errno_t
 wasi_fd_pread(wasm_exec_env_t exec_env, wasi_fd_t fd, iovec_app_t *iovec_app,
               uint32 iovs_len, wasi_filesize_t offset, uint32 *nread_app)
@@ -379,6 +386,7 @@ fail:
     return err;
 }
 
+[[maybe_unused]]
 static wasi_errno_t
 wasi_fd_pwrite(wasm_exec_env_t exec_env, wasi_fd_t fd,
                const iovec_app_t *iovec_app, uint32 iovs_len,
@@ -433,6 +441,7 @@ fail:
     return err;
 }
 
+[[maybe_unused]]
 static wasi_errno_t
 wasi_fd_read(wasm_exec_env_t exec_env, wasi_fd_t fd,
              const iovec_app_t *iovec_app, uint32 iovs_len, uint32 *nread_app)
@@ -485,6 +494,7 @@ fail:
     return err;
 }
 
+[[maybe_unused]]
 static wasi_errno_t
 wasi_fd_renumber(wasm_exec_env_t exec_env, wasi_fd_t from, wasi_fd_t to)
 {
@@ -499,6 +509,7 @@ wasi_fd_renumber(wasm_exec_env_t exec_env, wasi_fd_t from, wasi_fd_t to)
     return wasmtime_ssp_fd_renumber(curfds, prestats, from, to);
 }
 
+[[maybe_unused]]
 static wasi_errno_t
 wasi_fd_seek(wasm_exec_env_t exec_env, wasi_fd_t fd, wasi_filedelta_t offset,
              wasi_whence_t whence, wasi_filesize_t *newoffset)
@@ -516,6 +527,7 @@ wasi_fd_seek(wasm_exec_env_t exec_env, wasi_fd_t fd, wasi_filedelta_t offset,
     return wasmtime_ssp_fd_seek(curfds, fd, offset, whence, newoffset);
 }
 
+[[maybe_unused]]
 static wasi_errno_t
 wasi_fd_tell(wasm_exec_env_t exec_env, wasi_fd_t fd, wasi_filesize_t *newoffset)
 {
@@ -532,6 +544,7 @@ wasi_fd_tell(wasm_exec_env_t exec_env, wasi_fd_t fd, wasi_filesize_t *newoffset)
     return wasmtime_ssp_fd_tell(curfds, fd, newoffset);
 }
 
+[[maybe_unused]]
 static wasi_errno_t
 wasi_fd_fdstat_get(wasm_exec_env_t exec_env, wasi_fd_t fd,
                    wasi_fdstat_t *fdstat_app)
@@ -556,6 +569,7 @@ wasi_fd_fdstat_get(wasm_exec_env_t exec_env, wasi_fd_t fd,
     return 0;
 }
 
+[[maybe_unused]]
 static wasi_errno_t
 wasi_fd_fdstat_set_flags(wasm_exec_env_t exec_env, wasi_fd_t fd,
                          wasi_fdflags_t flags)
@@ -570,6 +584,7 @@ wasi_fd_fdstat_set_flags(wasm_exec_env_t exec_env, wasi_fd_t fd,
     return wasmtime_ssp_fd_fdstat_set_flags(curfds, fd, flags);
 }
 
+[[maybe_unused]]
 static wasi_errno_t
 wasi_fd_fdstat_set_rights(wasm_exec_env_t exec_env, wasi_fd_t fd,
                           wasi_rights_t fs_rights_base,
@@ -586,6 +601,7 @@ wasi_fd_fdstat_set_rights(wasm_exec_env_t exec_env, wasi_fd_t fd,
                                              fs_rights_inheriting);
 }
 
+[[maybe_unused]]
 static wasi_errno_t
 wasi_fd_sync(wasm_exec_env_t exec_env, wasi_fd_t fd)
 {
@@ -599,6 +615,7 @@ wasi_fd_sync(wasm_exec_env_t exec_env, wasi_fd_t fd)
     return wasmtime_ssp_fd_sync(curfds, fd);
 }
 
+[[maybe_unused]]
 static wasi_errno_t
 wasi_fd_write(wasm_exec_env_t exec_env, wasi_fd_t fd,
               const iovec_app_t *iovec_app, uint32 iovs_len,
@@ -652,6 +669,7 @@ fail:
     return err;
 }
 
+[[maybe_unused]]
 static wasi_errno_t
 wasi_fd_advise(wasm_exec_env_t exec_env, wasi_fd_t fd, wasi_filesize_t offset,
                wasi_filesize_t len, wasi_advice_t advice)
@@ -666,6 +684,7 @@ wasi_fd_advise(wasm_exec_env_t exec_env, wasi_fd_t fd, wasi_filesize_t offset,
     return wasmtime_ssp_fd_advise(curfds, fd, offset, len, advice);
 }
 
+[[maybe_unused]]
 static wasi_errno_t
 wasi_fd_allocate(wasm_exec_env_t exec_env, wasi_fd_t fd, wasi_filesize_t offset,
                  wasi_filesize_t len)
@@ -680,6 +699,7 @@ wasi_fd_allocate(wasm_exec_env_t exec_env, wasi_fd_t fd, wasi_filesize_t offset,
     return wasmtime_ssp_fd_allocate(curfds, fd, offset, len);
 }
 
+[[maybe_unused]]
 static wasi_errno_t
 wasi_path_create_directory(wasm_exec_env_t exec_env, wasi_fd_t fd,
                            const char *path, uint32 path_len)
@@ -694,6 +714,7 @@ wasi_path_create_directory(wasm_exec_env_t exec_env, wasi_fd_t fd,
     return wasmtime_ssp_path_create_directory(curfds, fd, path, path_len);
 }
 
+[[maybe_unused]]
 static wasi_errno_t
 wasi_path_link(wasm_exec_env_t exec_env, wasi_fd_t old_fd,
                wasi_lookupflags_t old_flags, const char *old_path,
@@ -712,6 +733,7 @@ wasi_path_link(wasm_exec_env_t exec_env, wasi_fd_t old_fd,
                                   old_path_len, new_fd, new_path, new_path_len);
 }
 
+[[maybe_unused]]
 static wasi_errno_t
 wasi_path_open(wasm_exec_env_t exec_env, wasi_fd_t dirfd,
                wasi_lookupflags_t dirflags, const char *path, uint32 path_len,
@@ -739,6 +761,7 @@ wasi_path_open(wasm_exec_env_t exec_env, wasi_fd_t dirfd,
     return err;
 }
 
+[[maybe_unused]]
 static wasi_errno_t
 wasi_fd_readdir(wasm_exec_env_t exec_env, wasi_fd_t fd, void *buf,
                 uint32 buf_len, wasi_dircookie_t cookie, uint32 *bufused_app)
@@ -763,6 +786,7 @@ wasi_fd_readdir(wasm_exec_env_t exec_env, wasi_fd_t fd, void *buf,
     return 0;
 }
 
+[[maybe_unused]]
 static wasi_errno_t
 wasi_path_readlink(wasm_exec_env_t exec_env, wasi_fd_t fd, const char *path,
                    uint32 path_len, char *buf, uint32 buf_len,
@@ -789,6 +813,7 @@ wasi_path_readlink(wasm_exec_env_t exec_env, wasi_fd_t fd, const char *path,
     return 0;
 }
 
+[[maybe_unused]]
 static wasi_errno_t
 wasi_path_rename(wasm_exec_env_t exec_env, wasi_fd_t old_fd,
                  const char *old_path, uint32 old_path_len, wasi_fd_t new_fd,
@@ -805,6 +830,7 @@ wasi_path_rename(wasm_exec_env_t exec_env, wasi_fd_t old_fd,
                                     new_fd, new_path, new_path_len);
 }
 
+[[maybe_unused]]
 static wasi_errno_t
 wasi_fd_filestat_get(wasm_exec_env_t exec_env, wasi_fd_t fd,
                      wasi_filestat_t *filestat)
@@ -822,6 +848,7 @@ wasi_fd_filestat_get(wasm_exec_env_t exec_env, wasi_fd_t fd,
     return wasmtime_ssp_fd_filestat_get(curfds, fd, filestat);
 }
 
+[[maybe_unused]]
 static wasi_errno_t
 wasi_fd_filestat_set_times(wasm_exec_env_t exec_env, wasi_fd_t fd,
                            wasi_timestamp_t st_atim, wasi_timestamp_t st_mtim,
@@ -838,6 +865,7 @@ wasi_fd_filestat_set_times(wasm_exec_env_t exec_env, wasi_fd_t fd,
                                               fstflags);
 }
 
+[[maybe_unused]]
 static wasi_errno_t
 wasi_fd_filestat_set_size(wasm_exec_env_t exec_env, wasi_fd_t fd,
                           wasi_filesize_t st_size)
@@ -852,6 +880,7 @@ wasi_fd_filestat_set_size(wasm_exec_env_t exec_env, wasi_fd_t fd,
     return wasmtime_ssp_fd_filestat_set_size(curfds, fd, st_size);
 }
 
+[[maybe_unused]]
 static wasi_errno_t
 wasi_path_filestat_get(wasm_exec_env_t exec_env, wasi_fd_t fd,
                        wasi_lookupflags_t flags, const char *path,
@@ -871,6 +900,7 @@ wasi_path_filestat_get(wasm_exec_env_t exec_env, wasi_fd_t fd,
                                           filestat);
 }
 
+[[maybe_unused]]
 static wasi_errno_t
 wasi_path_filestat_set_times(wasm_exec_env_t exec_env, wasi_fd_t fd,
                              wasi_lookupflags_t flags, const char *path,
@@ -888,6 +918,7 @@ wasi_path_filestat_set_times(wasm_exec_env_t exec_env, wasi_fd_t fd,
         curfds, fd, flags, path, path_len, st_atim, st_mtim, fstflags);
 }
 
+[[maybe_unused]]
 static wasi_errno_t
 wasi_path_symlink(wasm_exec_env_t exec_env, const char *old_path,
                   uint32 old_path_len, wasi_fd_t fd, const char *new_path,
@@ -905,6 +936,7 @@ wasi_path_symlink(wasm_exec_env_t exec_env, const char *old_path,
                                      fd, new_path, new_path_len);
 }
 
+[[maybe_unused]]
 static wasi_errno_t
 wasi_path_unlink_file(wasm_exec_env_t exec_env, wasi_fd_t fd, const char *path,
                       uint32 path_len)
@@ -919,6 +951,7 @@ wasi_path_unlink_file(wasm_exec_env_t exec_env, wasi_fd_t fd, const char *path,
     return wasmtime_ssp_path_unlink_file(curfds, fd, path, path_len);
 }
 
+[[maybe_unused]]
 static wasi_errno_t
 wasi_path_remove_directory(wasm_exec_env_t exec_env, wasi_fd_t fd,
                            const char *path, uint32 path_len)
@@ -933,6 +966,7 @@ wasi_path_remove_directory(wasm_exec_env_t exec_env, wasi_fd_t fd,
     return wasmtime_ssp_path_remove_directory(curfds, fd, path, path_len);
 }
 
+[[maybe_unused]]
 static wasi_errno_t
 wasi_poll_oneoff(wasm_exec_env_t exec_env, const wasi_subscription_t *in,
                  wasi_event_t *out, uint32 nsubscriptions, uint32 *nevents_app)
@@ -992,6 +1026,7 @@ wasi_random_get(wasm_exec_env_t exec_env, void *buf, uint32 buf_len)
     return wasmtime_ssp_random_get(buf, buf_len);
 }
 
+[[maybe_unused]]
 static wasi_errno_t
 wasi_sock_recv(wasm_exec_env_t exec_env, wasi_fd_t sock, iovec_app_t *ri_data,
                uint32 ri_data_len, wasi_riflags_t ri_flags,
@@ -1047,6 +1082,7 @@ fail:
     return err;
 }
 
+[[maybe_unused]]
 static wasi_errno_t
 wasi_sock_send(wasm_exec_env_t exec_env, wasi_fd_t sock,
                const iovec_app_t *si_data, uint32 si_data_len,
@@ -1101,7 +1137,7 @@ fail:
     return err;
 }
 
-static wasi_errno_t
+[[maybe_unused]] static wasi_errno_t
 wasi_sock_shutdown(wasm_exec_env_t exec_env, wasi_fd_t sock, wasi_sdflags_t how)
 {
     wasm_module_inst_t module_inst = get_module_inst(exec_env);
@@ -1134,6 +1170,18 @@ static NativeSymbol native_symbols_libc_wasi[] = {
 #endif
     REG_NATIVE_FUNC(environ_get, "(**)i"),
     REG_NATIVE_FUNC(environ_sizes_get, "(**)i"),
+
+
+     REG_NATIVE_FUNC(fd_prestat_get, "(i*)i"),
+     REG_NATIVE_FUNC(fd_prestat_dir_name, "(i*~)i"),
+     REG_NATIVE_FUNC(fd_close, "(i)i"),
+     REG_NATIVE_FUNC(fd_read, "(i*i*)i"),
+     REG_NATIVE_FUNC(fd_seek, "(iIi*)i"),
+     REG_NATIVE_FUNC(fd_fdstat_get, "(i*)i"),
+     REG_NATIVE_FUNC(fd_write, "(i*i*)i"),
+     REG_NATIVE_FUNC(path_open, "(ii*~iIIi*)i"),
+
+    
 #if WASM_PHANTOM_COMPAT == 0
     REG_NATIVE_FUNC(fd_prestat_get, "(i*)i"),
     REG_NATIVE_FUNC(fd_prestat_dir_name, "(i*~)i"),
