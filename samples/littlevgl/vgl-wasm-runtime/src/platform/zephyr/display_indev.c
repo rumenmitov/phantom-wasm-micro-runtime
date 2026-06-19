@@ -58,12 +58,14 @@ display_flush(wasm_exec_env_t exec_env, int32_t x1, int32_t y1, int32_t x2,
 void
 display_fill(wasm_exec_env_t exec_env, int32_t x1, int32_t y1, int32_t x2,
              int32_t y2, lv_color_t *color)
-{}
+{
+}
 
 void
 display_map(wasm_exec_env_t exec_env, int32_t x1, int32_t y1, int32_t x2,
             int32_t y2, const lv_color_t *color)
-{}
+{
+}
 
 bool
 display_input_read(wasm_exec_env_t exec_env, void *data)
@@ -80,7 +82,8 @@ display_input_read(wasm_exec_env_t exec_env, void *data)
 
 void
 display_deinit(wasm_exec_env_t exec_env)
-{}
+{
+}
 
 void
 display_vdb_write(wasm_exec_env_t exec_env, void *buf, lv_coord_t buf_w,

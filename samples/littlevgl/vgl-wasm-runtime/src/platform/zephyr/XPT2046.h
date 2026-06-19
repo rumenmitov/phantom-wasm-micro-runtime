@@ -32,7 +32,7 @@ extern "C" {
 #include <autoconf.h>
 #include <stdint.h>
 #include <stdbool.h>
-//#include "lvgl/lv_hal/lv_hal_indev.h"
+// #include "lvgl/lv_hal/lv_hal_indev.h"
 #include "device.h"
 #include "drivers/gpio.h"
 #if 1

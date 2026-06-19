@@ -1047,7 +1047,8 @@ __cxa_allocate_exception_wrapper(wasm_exec_env_t exec_env, uint32 thrown_size)
 
 static void
 __cxa_begin_catch_wrapper(wasm_exec_env_t exec_env, void *exception_object)
-{}
+{
+}
 
 static void
 __cxa_throw_wrapper(wasm_exec_env_t exec_env, void *thrown_exception,

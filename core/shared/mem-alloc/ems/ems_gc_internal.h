@@ -77,7 +77,7 @@ hmu_verify(void *vheap, hmu_t *hmu);
 
 #endif /* end of BH_ENABLE_GC_VERIFY */
 
-#define hmu_obj_size(s) ((s)-OBJ_EXTRA_SIZE)
+#define hmu_obj_size(s) ((s) - OBJ_EXTRA_SIZE)
 
 #define GC_ALIGN_8(s) (((uint32)(s) + 7) & (uint32)~7)
 
@@ -114,7 +114,7 @@ hmu_verify(void *vheap, hmu_t *hmu);
 #define HMU_SIZE (sizeof(hmu_t))
 
 #define hmu_to_obj(hmu) (gc_object_t)(SKIP_OBJ_PREFIX((hmu_t *)(hmu) + 1))
-#define obj_to_hmu(obj) ((hmu_t *)((gc_uint8 *)(obj)-OBJ_PREFIX_SIZE) - 1)
+#define obj_to_hmu(obj) ((hmu_t *)((gc_uint8 *)(obj) - OBJ_PREFIX_SIZE) - 1)
 
 #define HMU_UT_SIZE 2
 #define HMU_UT_OFFSET 30

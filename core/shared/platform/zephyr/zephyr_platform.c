@@ -83,7 +83,8 @@ os_realloc(void *ptr, unsigned size)
 
 void
 os_free(void *ptr)
-{}
+{
+}
 
 #if 0
 struct out_context {

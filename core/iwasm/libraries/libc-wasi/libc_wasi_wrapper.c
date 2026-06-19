@@ -266,7 +266,7 @@ wasi_environ_sizes_get(wasm_exec_env_t exec_env, uint32 *environ_count_app,
 static wasi_errno_t
 wasi_fd_prestat_get(wasm_exec_env_t exec_env, wasi_fd_t fd,
                     wasi_prestat_app_t *prestat_app)
-{  
+{
     wasm_module_inst_t module_inst = get_module_inst(exec_env);
     wasi_ctx_t wasi_ctx = get_wasi_ctx(module_inst);
     struct fd_prestats *prestats = wasi_ctx_get_prestats(module_inst, wasi_ctx);
@@ -1171,17 +1171,15 @@ static NativeSymbol native_symbols_libc_wasi[] = {
     REG_NATIVE_FUNC(environ_get, "(**)i"),
     REG_NATIVE_FUNC(environ_sizes_get, "(**)i"),
 
+    REG_NATIVE_FUNC(fd_prestat_get, "(i*)i"),
+    REG_NATIVE_FUNC(fd_prestat_dir_name, "(i*~)i"),
+    REG_NATIVE_FUNC(fd_close, "(i)i"),
+    REG_NATIVE_FUNC(fd_read, "(i*i*)i"),
+    REG_NATIVE_FUNC(fd_seek, "(iIi*)i"),
+    REG_NATIVE_FUNC(fd_fdstat_get, "(i*)i"),
+    REG_NATIVE_FUNC(fd_write, "(i*i*)i"),
+    REG_NATIVE_FUNC(path_open, "(ii*~iIIi*)i"),
 
-     REG_NATIVE_FUNC(fd_prestat_get, "(i*)i"),
-     REG_NATIVE_FUNC(fd_prestat_dir_name, "(i*~)i"),
-     REG_NATIVE_FUNC(fd_close, "(i)i"),
-     REG_NATIVE_FUNC(fd_read, "(i*i*)i"),
-     REG_NATIVE_FUNC(fd_seek, "(iIi*)i"),
-     REG_NATIVE_FUNC(fd_fdstat_get, "(i*)i"),
-     REG_NATIVE_FUNC(fd_write, "(i*i*)i"),
-     REG_NATIVE_FUNC(path_open, "(ii*~iIIi*)i"),
-
-    
 #if WASM_PHANTOM_COMPAT == 0
     REG_NATIVE_FUNC(fd_prestat_get, "(i*)i"),
     REG_NATIVE_FUNC(fd_prestat_dir_name, "(i*~)i"),

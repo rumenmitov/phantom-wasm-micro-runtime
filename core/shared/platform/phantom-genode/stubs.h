@@ -55,8 +55,8 @@ typedef int clockid_t;
 typedef void *DIR;
 typedef int socklen_t;
 struct iovec {
-  void   *iov_base;
-  size_t  iov_len;
+    void *iov_base;
+    size_t iov_len;
 };
 typedef int socktype;
 struct msghdr {
@@ -82,18 +82,18 @@ typedef int FILE;
 typedef unsigned long nfds_t;
 typedef hal_mutex_t pthread_rwlock_t;
 
-#define S_ISLNK(m)  (((m) & S_IFMT) == S_IFLNK)
-#define S_ISREG(m)  (((m) & S_IFMT) == S_IFREG)
-#define S_ISDIR(m)  (((m) & S_IFMT) == S_IFDIR)
-#define S_ISCHR(m)  (((m) & S_IFMT) == S_IFCHR)
-#define S_ISBLK(m)  (((m) & S_IFMT) == S_IFBLK)
+#define S_ISLNK(m) (((m) & S_IFMT) == S_IFLNK)
+#define S_ISREG(m) (((m) & S_IFMT) == S_IFREG)
+#define S_ISDIR(m) (((m) & S_IFMT) == S_IFDIR)
+#define S_ISCHR(m) (((m) & S_IFMT) == S_IFCHR)
+#define S_ISBLK(m) (((m) & S_IFMT) == S_IFBLK)
 #define S_ISFIFO(m) (((m) & S_IFMT) == S_IFIFO)
 #define S_ISSOCK(m) (((m) & S_IFMT) == S_IFSOCK)
 
 #define F_GETFL 3
 
 #define O_RDWR 2
-#define O_CREAT	   0100
+#define O_CREAT 0100
 
 #define SO_TYPE 0x1008
 #define SOCK_STREAM 1

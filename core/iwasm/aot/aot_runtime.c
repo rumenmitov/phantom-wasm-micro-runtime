@@ -1346,7 +1346,7 @@ invoke_native_with_hw_bound_check(WASMExecEnv *exec_env, void *func_ptr,
             else if (result_count == 1
                      && types[param_count] == VALUE_TYPE_I32) {
                 uint32 (*NativeFunc)(WASMExecEnv *, uint32) =
-                    (uint32(*)(WASMExecEnv *, uint32))func_ptr;
+                    (uint32 (*)(WASMExecEnv *, uint32))func_ptr;
                 argv_ret[0] = NativeFunc(exec_env, argv[0]);
                 ret = aot_get_exception(module_inst) ? false : true;
             }

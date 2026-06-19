@@ -716,19 +716,13 @@ wasm_app_module_install(request_t *msg)
         {
             wasm_bytecode_file_t *bytecode_file;
             /* Sections to be released after loading */
-            uint8 sections1[] = {
-                SECTION_TYPE_USER,
-                SECTION_TYPE_TYPE,
-                SECTION_TYPE_IMPORT,
-                SECTION_TYPE_FUNC,
-                SECTION_TYPE_TABLE,
-                SECTION_TYPE_MEMORY,
-                SECTION_TYPE_GLOBAL,
-                SECTION_TYPE_EXPORT,
-                SECTION_TYPE_START,
-                SECTION_TYPE_ELEM,
+            uint8 sections1[] = { SECTION_TYPE_USER,     SECTION_TYPE_TYPE,
+                                  SECTION_TYPE_IMPORT,   SECTION_TYPE_FUNC,
+                                  SECTION_TYPE_TABLE,    SECTION_TYPE_MEMORY,
+                                  SECTION_TYPE_GLOBAL,   SECTION_TYPE_EXPORT,
+                                  SECTION_TYPE_START,    SECTION_TYPE_ELEM,
 #if WASM_ENABLE_BULK_MEMORY != 0
-                SECTION_TYPE_DATACOUNT
+                                  SECTION_TYPE_DATACOUNT
 #endif
 
             };

@@ -19,4 +19,5 @@ os_realloc(void *ptr, unsigned size)
 
 void
 os_free(void *ptr)
-{}
+{
+}

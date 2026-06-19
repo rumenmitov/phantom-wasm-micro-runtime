@@ -45,7 +45,8 @@ static int16_t last_y = 0;
  */
 void
 mouse_init(void)
-{}
+{
+}
 
 /**
  * Get the current position and state of the mouse

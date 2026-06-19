@@ -3,12 +3,15 @@
 #include "bh_read_file.h"
 #include "bh_getopt.h"
 
-void print_usage(void) {
+void
+print_usage(void)
+{
     fprintf(stdout, "Usage:\r\n");
     fprintf(stdout, "  <path of wasm file> [input for wasm function]\n");
 }
 
-int run_wasm(const char* filename, const char* funcname, int input)
+int
+run_wasm(const char *filename, const char *funcname, int input)
 {
     char *buffer, error_buf[128];
 
@@ -61,7 +64,8 @@ int run_wasm(const char* filename, const char* funcname, int input)
         goto fail;
     }
 
-    // 07. Function call with parameters in an array of 32 bits elements and size
+    // 07. Function call with parameters in an array of 32 bits elements and
+    // size
     uint32 argv[2];
     // pass 2 elements for function arguments
     argv[0] = input;
@@ -71,7 +75,7 @@ int run_wasm(const char* filename, const char* funcname, int input)
         goto fail;
     }
 
-    double e = *((double*)argv);
+    double e = *((double *)argv);
 
     printf("Executed successfully. Result: e = %f\n", e);
 
@@ -94,12 +98,15 @@ fail:
 int
 main(int argc, char *argv_main[])
 {
-    if (argc == 1) { print_usage(); return 0; }
-    const char* wasm_path = argv_main[1];
+    if (argc == 1) {
+        print_usage();
+        return 0;
+    }
+    const char *wasm_path = argv_main[1];
 
     printf("WASM path: %s\n", wasm_path);
 
-    const char* func_name = "calculate_e";
+    const char *func_name = "calculate_e";
     int N = 100000;
     if (argc > 2) {
         N = atoi(argv_main[2]);

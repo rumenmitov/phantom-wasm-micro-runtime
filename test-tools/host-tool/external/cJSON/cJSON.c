@@ -2499,10 +2499,11 @@ CJSON_PUBLIC(cJSON *) cJSON_Duplicate(const cJSON *item, cJSON_bool recurse)
         }
     }
     if (item->string) {
-        newitem->string = (item->type & cJSON_StringIsConst)
-                              ? item->string
-                              : (char *)cJSON_strdup(
-                                  (unsigned char *)item->string, &global_hooks);
+        newitem->string =
+            (item->type & cJSON_StringIsConst)
+                ? item->string
+                : (char *)cJSON_strdup((unsigned char *)item->string,
+                                       &global_hooks);
         if (!newitem->string) {
             goto fail;
         }

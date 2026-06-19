@@ -248,4 +248,5 @@ os_mprotect(void *addr, size_t size, int prot)
 
 void
 os_dcache_flush(void)
-{}
+{
+}

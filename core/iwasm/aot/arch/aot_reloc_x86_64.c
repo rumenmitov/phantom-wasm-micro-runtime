@@ -165,7 +165,7 @@ apply_relocation(AOTModule *module, uint8 *target_section_addr,
 #if !defined(BH_PLATFORM_WINDOWS)
         case R_X86_64_PC32:
         {
-            intptr_t target_addr = (intptr_t) /* S + A - P */
+            intptr_t target_addr = (intptr_t)/* S + A - P */
                 ((uintptr_t)symbol_addr + reloc_addend
                  - (uintptr_t)(target_section_addr + reloc_offset));
 
@@ -224,12 +224,12 @@ apply_relocation(AOTModule *module, uint8 *target_section_addr,
                 plt = (uint8 *)module->code + module->code_size
                       - get_plt_table_size()
                       + get_plt_item_size() * symbol_index;
-                target_addr = (intptr_t) /* L + A - P */
+                target_addr = (intptr_t)/* L + A - P */
                     ((uintptr_t)plt + reloc_addend
                      - (uintptr_t)(target_section_addr + reloc_offset));
             }
             else {
-                target_addr = (intptr_t) /* L + A - P */
+                target_addr = (intptr_t)/* L + A - P */
                     ((uintptr_t)symbol_addr + reloc_addend
                      - (uintptr_t)(target_section_addr + reloc_offset));
             }

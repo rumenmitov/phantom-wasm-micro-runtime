@@ -166,7 +166,8 @@ monitor_map(int32_t x1, int32_t y1, int32_t x2, int32_t y2,
 
 void
 display_init(void)
-{}
+{
+}
 
 void
 display_flush(int32_t x1, int32_t y1, int32_t x2, int32_t y2,
@@ -194,7 +195,8 @@ display_input_read(lv_indev_data_t *data)
 
 void
 display_deinit(void)
-{}
+{
+}
 
 int
 monitor_sdl_refr_thread(void *param)

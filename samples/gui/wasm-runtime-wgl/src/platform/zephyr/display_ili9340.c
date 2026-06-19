@@ -7,9 +7,9 @@
 #include "display_ili9340.h"
 #include <display.h>
 
-//#define LOG_LEVEL CONFIG_DISPLAY_LOG_LEVEL
-//#include <logging/log.h>
-// LOG_MODULE_REGISTER(display_ili9340);
+// #define LOG_LEVEL CONFIG_DISPLAY_LOG_LEVEL
+// #include <logging/log.h>
+//  LOG_MODULE_REGISTER(display_ili9340);
 #define LOG_ERR printf
 #define LOG_DBG printf
 #define LOG_WRN printf

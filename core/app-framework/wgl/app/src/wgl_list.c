@@ -56,14 +56,14 @@ lv_list_add_btn(lv_obj_t *list, const void *img_src, const char *txt)
 //    wasm_list_set_single_mode(list, mode);
 //}
 //
-//#if LV_USE_GROUP
+// #if LV_USE_GROUP
 //
 //
 // void wgl_list_set_btn_selected(wgl_obj_t list, wgl_obj_t btn)
 //{
 //    wasm_list_set_btn_selected(list, btn);
 //}
-//#endif
+// #endif
 //
 //
 // void wgl_list_set_style(wgl_obj_t list, wgl_list_style_t type,
@@ -119,13 +119,13 @@ lv_list_add_btn(lv_obj_t *list, const void *img_src, const char *txt)
 //    return wasm_list_get_size(list);
 //}
 //
-//#if LV_USE_GROUP
+// #if LV_USE_GROUP
 //
 // wgl_obj_t wgl_list_get_btn_selected(const wgl_obj_t list)
 //{
 //    return wasm_list_get_btn_selected(list);
 //}
-//#endif
+// #endif
 //
 //
 //

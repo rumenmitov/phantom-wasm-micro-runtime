@@ -23,30 +23,41 @@ print_help()
 {
     printf("Usage: iwasm [-options] wasm_file [args...]\n");
     printf("options:\n");
-    printf("  -f|--function name     Specify a function name of the module to run rather\n"
+    printf("  -f|--function name     Specify a function name of the module to "
+           "run rather\n"
            "                         than main\n");
 #if WASM_ENABLE_LOG != 0
-    printf("  -v=n                   Set log verbose level (0 to 5, default is 2) larger\n"
+    printf("  -v=n                   Set log verbose level (0 to 5, default is "
+           "2) larger\n"
            "                         level with more log\n");
 #endif
-    printf("  --stack-size=n         Set maximum stack size in bytes, default is 16 KB\n");
-    printf("  --heap-size=n          Set maximum heap size in bytes, default is 16 KB\n");
-    printf("  --repl                 Start a very simple REPL (read-eval-print-loop) mode\n"
-           "                         that runs commands in the form of `FUNC ARG...`\n");
+    printf("  --stack-size=n         Set maximum stack size in bytes, default "
+           "is 16 KB\n");
+    printf("  --heap-size=n          Set maximum heap size in bytes, default "
+           "is 16 KB\n");
+    printf("  --repl                 Start a very simple REPL "
+           "(read-eval-print-loop) mode\n"
+           "                         that runs commands in the form of `FUNC "
+           "ARG...`\n");
 #if WASM_ENABLE_LIBC_WASI != 0
-    printf("  --env=<env>            Pass wasi environment variables with \"key=value\"\n");
+    printf("  --env=<env>            Pass wasi environment variables with "
+           "\"key=value\"\n");
     printf("                         to the program, for example:\n");
-    printf("                           --env=\"key1=value1\" --env=\"key2=value2\"\n");
-    printf("  --dir=<dir>            Grant wasi access to the given host directories\n");
+    printf("                           --env=\"key1=value1\" "
+           "--env=\"key2=value2\"\n");
+    printf("  --dir=<dir>            Grant wasi access to the given host "
+           "directories\n");
     printf("                         to the program, for example:\n");
     printf("                           --dir=<dir1> --dir=<dir2>\n");
 #endif
 #if WASM_ENABLE_MULTI_MODULE != 0
-    printf("  --module-path=         Indicate a module search path. default is current\n"
+    printf("  --module-path=         Indicate a module search path. default is "
+           "current\n"
            "                         directory('./')\n");
 #endif
 #if WASM_ENABLE_LIB_PTHREAD != 0
-    printf("  --max-threads=n        Set maximum thread number per cluster, default is 4\n");
+    printf("  --max-threads=n        Set maximum thread number per cluster, "
+           "default is 4\n");
 #endif
     return 1;
 }
@@ -187,8 +198,8 @@ module_reader_callback(const char *module_name, uint8 **p_buffer,
                        uint32 *p_size)
 {
     const char *format = "%s/%s.wasm";
-    int sz = strlen(module_search_path) + strlen("/") + strlen(module_name) +
-             strlen(".wasm") + 1;
+    int sz = strlen(module_search_path) + strlen("/") + strlen(module_name)
+             + strlen(".wasm") + 1;
     char *wasm_file_name = BH_MALLOC(sz);
     if (!wasm_file_name) {
         return false;
@@ -350,7 +361,7 @@ main_old(int argc, char *argv[])
 
     /* load WASM byte buffer from WASM bin file */
     if (!(wasm_file_buf =
-            (uint8 *)bh_read_file_to_buffer(wasm_file, &wasm_file_size)))
+              (uint8 *)bh_read_file_to_buffer(wasm_file, &wasm_file_size)))
         goto fail1;
 
 #if WASM_ENABLE_MULTI_MODULE != 0
@@ -371,8 +382,8 @@ main_old(int argc, char *argv[])
 
     /* instantiate the module */
     if (!(wasm_module_inst =
-            wasm_runtime_instantiate(wasm_module, stack_size, heap_size,
-                                     error_buf, sizeof(error_buf)))) {
+              wasm_runtime_instantiate(wasm_module, stack_size, heap_size,
+                                       error_buf, sizeof(error_buf)))) {
         printf("%s\n", error_buf);
         goto fail3;
     }
@@ -401,7 +412,8 @@ fail1:
     return 0;
 }
 
-extern void wait_for_continue();
+extern void
+wait_for_continue();
 
 int
 main(int argc, char *argv[])
@@ -419,9 +431,9 @@ main(int argc, char *argv[])
     wasm_module_inst_t wasm_module_inst = NULL;
     RuntimeInitArgs init_args;
     char error_buf[128] = { 0 };
-// #if WASM_ENABLE_LOG != 0
-//     int log_verbose_level = 2;
-// #endif
+    // #if WASM_ENABLE_LOG != 0
+    //     int log_verbose_level = 2;
+    // #endif
     int log_verbose_level = 2;
 
     bool is_repl_mode = false;
@@ -463,7 +475,7 @@ main(int argc, char *argv[])
 
     /* load WASM byte buffer from WASM bin file */
     if (!(wasm_file_buf =
-            (uint8 *)bh_read_file_to_buffer(wasm_file, &wasm_file_size)))
+              (uint8 *)bh_read_file_to_buffer(wasm_file, &wasm_file_size)))
         goto fail1;
 
 #if WASM_ENABLE_MULTI_MODULE != 0
@@ -484,8 +496,8 @@ main(int argc, char *argv[])
 
     /* instantiate the module */
     if (!(wasm_module_inst =
-            wasm_runtime_instantiate(wasm_module, stack_size, heap_size,
-                                     error_buf, sizeof(error_buf)))) {
+              wasm_runtime_instantiate(wasm_module, stack_size, heap_size,
+                                       error_buf, sizeof(error_buf)))) {
         printf("%s\n", error_buf);
         goto fail3;
     }

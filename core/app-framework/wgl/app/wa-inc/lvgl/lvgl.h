@@ -10,7 +10,8 @@
 extern "C" {
 #endif
 
-//#include "bi-inc/wgl_shared_utils.h" /* shared types between app and native */
+// #include "bi-inc/wgl_shared_utils.h" /* shared types between app and native
+// */
 /*
 #include "lvgl-compatible/lv_types.h"
 #include "lvgl-compatible/lv_obj.h"
@@ -25,9 +26,9 @@ extern "C" {
 #include "src/lv_misc/lv_log.h"
 #include "src/lv_misc/lv_task.h"
 #include "src/lv_misc/lv_math.h"
-//#include "src/lv_misc/lv_async.h"
+// #include "src/lv_misc/lv_async.h"
 
-//#include "src/lv_hal/lv_hal.h"
+// #include "src/lv_hal/lv_hal.h"
 
 #include "src/lv_core/lv_obj.h"
 #include "src/lv_core/lv_group.h"

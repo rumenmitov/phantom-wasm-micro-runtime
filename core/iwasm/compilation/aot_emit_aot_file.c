@@ -19,9 +19,9 @@
 
 #define CHECK_SIZE(size)                                   \
     do {                                                   \
-        if (size == (uint32)-1) {                          \
+        if (size == (uint32) - 1) {                        \
             aot_set_last_error("get symbol size failed."); \
-            return (uint32)-1;                             \
+            return (uint32) - 1;                           \
         }                                                  \
     } while (0)
 

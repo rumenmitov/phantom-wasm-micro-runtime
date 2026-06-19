@@ -2913,7 +2913,8 @@ argv_environ_init(struct argv_environ_values *argv_environ, char *argv_buf,
 
 void
 argv_environ_destroy(struct argv_environ_values *argv_environ)
-{}
+{
+}
 
 void
 fd_table_destroy(struct fd_table *ft)

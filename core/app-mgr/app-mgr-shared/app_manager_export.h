@@ -20,7 +20,7 @@ extern "C" {
 #define ID_HOST -3
 #define ID_APP_MGR -2
 /* Invalid module ID */
-#define ID_NONE ((uint32)-1)
+#define ID_NONE ((uint32) - 1)
 
 struct attr_container_t;
 

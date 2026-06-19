@@ -758,9 +758,11 @@ wasm_interp_call_func_native(WASMModuleInstance *module_inst,
                              WASMFunctionInstance *cur_func,
                              WASMInterpFrame *prev_frame
 #if WASM_PHANTOM_COMPAT != 0
-                             , uint32 *stack_pointer
+                             ,
+                             uint32 *stack_pointer
 #endif
-) {
+)
+{
     WASMFunctionImport *func_import = cur_func->u.func_import;
     unsigned local_cell_num = 2;
     WASMInterpFrame *frame;
@@ -915,8 +917,9 @@ wasm_interp_call_func_import(WASMModuleInstance *module_inst,
 #endif /* WASM_ENABLE_THREAD_MGR */
 
 #if WASM_PHANTOM_COMPAT != 0
-extern volatile int     phantom_virtual_machine_snap_request;
-void phantom_thread_wait_4_snap( void );
+extern volatile int phantom_virtual_machine_snap_request;
+void
+phantom_thread_wait_4_snap(void);
 #endif /* WASM_PHANTOM_COMPAT */
 
 #if WASM_ENABLE_LABELS_AS_VALUES != 0
@@ -937,14 +940,13 @@ void phantom_thread_wait_4_snap( void );
         goto *handle_table[*frame_ip++];                                  \
     } while (0)
 #elif WASM_PHANTOM_COMPAT != 0
-#define HANDLE_OP_END()                                                 \
-    do {                                                                \
-        if(phantom_virtual_machine_snap_request)                          \
-        {                                                                 \
-            SYNC_ALL_TO_FRAME();                                          \
-            phantom_thread_wait_4_snap();                                 \
-        }                                                                 \
-        goto *handle_table[*frame_ip++];                                  \
+#define HANDLE_OP_END()                             \
+    do {                                            \
+        if (phantom_virtual_machine_snap_request) { \
+            SYNC_ALL_TO_FRAME();                    \
+            phantom_thread_wait_4_snap();           \
+        }                                           \
+        goto *handle_table[*frame_ip++];            \
     } while (0)
 #else
 #define HANDLE_OP_END() FETCH_OPCODE_AND_DISPATCH()
@@ -1023,13 +1025,13 @@ wasm_interp_call_func_bytecode(WASMModuleInstance *module,
 #if WASM_PHANTOM_COMPAT != 0
     if (prev_frame == NULL) {
         RECOVER_CONTEXT(wasm_exec_env_get_cur_frame(exec_env));
-        
+
         // if current frame is a native function, drop it
-        if (cur_func->is_import_func 
+        if (cur_func->is_import_func
 #if WASM_ENABLE_MULTI_MODULE != 0
             && !cur_func->import_func_inst
 #endif
-        ) { 
+        ) {
             wasm_exec_env_free_wasm_frame(exec_env, frame);
             RECOVER_CONTEXT(prev_frame);
         }
@@ -1039,8 +1041,7 @@ wasm_interp_call_func_bytecode(WASMModuleInstance *module,
 #if WASM_ENABLE_LABELS_AS_VALUES == 0
     while (frame_ip < frame_ip_end) {
 #if WASM_PHANTOM_COMPAT != 0
-        if(phantom_virtual_machine_snap_request)
-        {
+        if (phantom_virtual_machine_snap_request) {
             SYNC_ALL_TO_FRAME();
             phantom_thread_wait_4_snap();
         }
@@ -1057,7 +1058,10 @@ wasm_interp_call_func_bytecode(WASMModuleInstance *module,
                 goto got_exception;
             }
 
-            HANDLE_OP(WASM_OP_NOP) { HANDLE_OP_END(); }
+            HANDLE_OP(WASM_OP_NOP)
+            {
+                HANDLE_OP_END();
+            }
 
             HANDLE_OP(EXT_OP_BLOCK)
             {
@@ -1245,8 +1249,8 @@ wasm_interp_call_func_bytecode(WASMModuleInstance *module,
             {
 #if WASM_PHANTOM_COMPAT != 0 // sync to frame before potential native call
                 // SYNC_ALL_TO_FRAME();
-                frame->sp = frame_sp; 
-                frame->ip = frame_ip - 1; 
+                frame->sp = frame_sp;
+                frame->ip = frame_ip - 1;
                 frame->csp = frame_csp;
 #endif
 
@@ -1291,8 +1295,8 @@ wasm_interp_call_func_bytecode(WASMModuleInstance *module,
             {
 #if WASM_PHANTOM_COMPAT != 0 // sync to frame before potential native call
                 // SYNC_ALL_TO_FRAME();
-                frame->sp = frame_sp; 
-                frame->ip = frame_ip - 1; 
+                frame->sp = frame_sp;
+                frame->ip = frame_ip - 1;
                 frame->csp = frame_csp;
 #endif
 
@@ -2879,7 +2883,10 @@ wasm_interp_call_func_bytecode(WASMModuleInstance *module,
             HANDLE_OP(WASM_OP_I32_REINTERPRET_F32)
             HANDLE_OP(WASM_OP_I64_REINTERPRET_F64)
             HANDLE_OP(WASM_OP_F32_REINTERPRET_I32)
-            HANDLE_OP(WASM_OP_F64_REINTERPRET_I64) { HANDLE_OP_END(); }
+            HANDLE_OP(WASM_OP_F64_REINTERPRET_I64)
+            {
+                HANDLE_OP_END();
+            }
 
             HANDLE_OP(WASM_OP_I32_EXTEND8_S)
             {
@@ -3656,9 +3663,10 @@ wasm_interp_call_func_bytecode(WASMModuleInstance *module,
                 wasm_interp_call_func_native(module, exec_env, cur_func,
                                              prev_frame
 #if WASM_PHANTOM_COMPAT != 0
-                                             , frame_sp
+                                             ,
+                                             frame_sp
 #endif
-                                             );
+                );
 #if WASM_PHANTOM_COMPAT != 0
                 frame->ip = frame_ip; // restore correct ip
 #endif
@@ -3781,7 +3789,7 @@ wasm_interp_call_wasm(WASMModuleInstance *module_inst, WASMExecEnv *exec_env,
 #endif
         /* Allocate sufficient cells for all kinds of return values.  */
         unsigned all_cell_num =
-                     function->ret_cell_num > 2 ? function->ret_cell_num : 2;
+            function->ret_cell_num > 2 ? function->ret_cell_num : 2;
         /* This frame won't be used by JITed code, so only allocate interp
            frame here.  */
         unsigned frame_size = wasm_interp_interp_frame_size(all_cell_num);
@@ -3800,8 +3808,8 @@ wasm_interp_call_wasm(WASMModuleInstance *module_inst, WASMExecEnv *exec_env,
             return;
         }
 
-        if (!(frame =
-                  ALLOC_FRAME(exec_env, frame_size, (WASMInterpFrame *)prev_frame)))
+        if (!(frame = ALLOC_FRAME(exec_env, frame_size,
+                                  (WASMInterpFrame *)prev_frame)))
             return;
 
         outs_area = wasm_exec_env_wasm_stack_top(exec_env);
@@ -3828,10 +3836,10 @@ wasm_interp_call_wasm(WASMModuleInstance *module_inst, WASMExecEnv *exec_env,
 #endif
         {
             /* it is a native function */
-            wasm_interp_call_func_native(module_inst, exec_env, function,
-                                         frame
+            wasm_interp_call_func_native(module_inst, exec_env, function, frame
 #if WASM_PHANTOM_COMPAT != 0
-                                         , frame->sp
+                                         ,
+                                         frame->sp
 #endif
             );
         }
